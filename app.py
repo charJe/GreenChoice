@@ -1,8 +1,8 @@
 #@author: Mohit Bhole
 from flask import Flask,request
+from process import OCR
+from getWaterFootPrint import calculateEverything
 import json
-import process
-import getWaterFootPrint
 from flask import Flask,request
 
 app = Flask(__name__)

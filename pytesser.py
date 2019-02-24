@@ -52,21 +52,5 @@ def image_file_to_string(filename, cleanup = cleanup_scratch_flag, graceful_erro
 	finally:
 		if cleanup:
 			util.perform_cleanup(scratch_image_name, scratch_text_name_root)
-	return text
+	return (text)
 	
-
-if __name__=='__main__':
-	im = Image.open('phototest.tif')
-	text = image_to_string(im)
-	print text
-	try:
-		text = image_file_to_string('fnord.tif', graceful_errors=False)
-	except errors.Tesser_General_Exception, value:
-		print "fnord.tif is incompatible filetype.  Try graceful_errors=True"
-		print value
-	text = image_file_to_string('fnord.tif', graceful_errors=True)
-	print "fnord.tif contents:", text
-	text = image_file_to_string('fonts_test.png', graceful_errors=True)
-	print text
-
-

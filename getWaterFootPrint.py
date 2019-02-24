@@ -15,7 +15,6 @@ def calculateEverything(ingredients):
     with open('./DietaryRestrictions.json') as json_file:  
         restrictionsJSON = json.load(json_file)
     finalJSON = setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON)
-    print(finalJSON)
     return(finalJSON)
 
 def setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON):

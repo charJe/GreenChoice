@@ -14,16 +14,15 @@ processor = None
 # returns an unrefined string of ingredients
 def convertPic():
       	if os.path.isfile('pic.png'):
-                print "Looking at picture..."
+                print ("Looking at picture...")
                 # actualy OCR here, currently trying tesseract with pytesser
                 im=Image.open('pic.png')
                 text=image_to_string(im)
                 text=image_file_to_string('pic.png')
                 text=image_file_to_string('pic.png',graceful_errors=True)
-                print "Done reading picture"
-                return text
-	else:
-		print("No such file: {}".format(source_file))
+                print ("Done reading picture")
+                print(text)
+                return (text)
         
 def parseList( text):
         lst = re.split(':\s*|,\s*|;\s*|\.\s*',text)
@@ -62,8 +61,8 @@ def OCR( encoded64Pic ):
         try:                               
                 return parseList( convertPic())
         except:
-                print "OCR failed"
-                return "Picture quality is too low, or picture needs to be cropped\n"
+                print ("OCR failed")
+                return ("Picture quality is too low, or picture needs to be cropped\n")
                 
 def main():
         #with open("notBread.png", 'rb') as f:
@@ -72,10 +71,10 @@ def main():
         #OCR(encodedStr)
         # directly tries OCR on 'pic'
         try:
-                print parseList( convertPic())
+                print (parseList( convertPic()))
         except:
-                print "OCR failed"
-                return "Picture quality is too low, or picture needs to be cropped\n"
+                print ("OCR failed")
+                return ("Picture quality is too low, or picture needs to be cropped\n")
         
 if __name__ == "__main__":
 	main()
