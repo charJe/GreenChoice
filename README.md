@@ -28,6 +28,6 @@ We hope to promote conscious, compassionate eating by encouraging consumers to t
 #### Sources
 Vegetarian Journal's Guide To Food Ingredients. (n.d.). Retrieved from https://www.vrg.org/ingredients/
 
-<a href = "Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf">Mekonnen, Hoekstra, et. al. Farm Animal Product Water Footprint, 2012. </a>
+<a href = "Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf">Mekonnen, M. and Hoekstra, A. A Global Assessment of the Water Footprint of Farm Animal Products, 2012. </a>
 
-<a href = "Mekonnen-Hoekstra-2011-WaterFootprintCrops_2.pdf">Mekonnen, Hoekstra, et. al. Crops Water Footprint, 2011. </a>
+<a href = "Mekonnen-Hoekstra-2011-WaterFootprintCrops_2.pdf">Mekonnen, M. and Hoekstra, A. The green, blue and grey water footprint of crops and derived crop products, 2011. </a>
