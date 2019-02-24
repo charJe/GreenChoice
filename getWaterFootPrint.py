@@ -17,44 +17,38 @@ def waterFootPrint(ingredients):
     # add up the water footprint of all the ingredients
 
     for ingre in ingredients:
-        ing = getIngreInfo(ingre)
-        twf+= ing[3]
-        greywf+= ing[2]
-        gwf+= ing[1]
-        bwf+= ing[0]
+        ing = getIngreInfo(ingre, 'GlobalAvgWaterFootPrintForPrimaryCrop.json')
+        twf+= ing[1][3]
+        greywf+= ing[1][2]
+        gwf+= ing[1][1]
+        bwf+= ing[1][0]
     
     return [bwf, gwf, greywf, twf]
 
 
 # look for the specific ingredient in the json
-def getIngreInfo(ingredient):
+def getIngreInfo(ingredient, file):
     
-    with open('GlobalAvgWaterFootPrintForPrimaryCrop.json') as f:
+    with open(file) as f:
         data = json.load(f)
 
-    best = 0;
-    ttwf = 0
-    tgwf = 0
-    tbwf = 0
-    tgreywf = 0
-    bestM = ""
+    best = 30;
 
+    ing = [];
+
+# go through the data
     for x in data:
         a = fuzz.ratio(x[0], ingredient)
         if a > best:
             best = a
-            bestM = x[0]
-            ttwf = x[1][3]
-            tgreywf = x[1][2]
-            tgwf = x[1][1]
-            tbwf = x[1][0]
+            ing = x
+# return the total for the best match
+    print(ing)
+    return ing;
 
-  
-    print (bestM)
 
-    return [tbwf,tgwf,tgreywf,ttwf];
 
-getIngreInfo("")
+getIngreInfo("wheat",'GlobalAvgWaterFootPrintForPrimaryCrop.json')
 
 
 
