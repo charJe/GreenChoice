@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 let LOCATION = null
 
 function POST(data, endpoint) {
-  return fetch('http://192.168.137.1:5000' + endpoint, {
+  return fetch('http://192.168.137.134:5000' + endpoint, {
   method: 'POST',
   headers: {
     Accept: 'application/json',
@@ -22,7 +22,7 @@ function POST(data, endpoint) {
 
 function GET(endpoint) {
   console.log("Getting " + endpoint)
-  return fetch('http://192.168.137.1:5000' + endpoint, {
+  return fetch('http://192.168.137.134:5000' + endpoint, {
   method: 'GET',
   methods: 'GET',
   headers: {

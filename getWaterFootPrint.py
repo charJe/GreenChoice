@@ -60,6 +60,3 @@ def loadWaterJSON():
 
     
     return parsedData
-
-
-calculateEverything(["wheat","eggs","VITAMIN P COMPLEX"])

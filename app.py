@@ -21,8 +21,8 @@ def getPicture():
         global picture
         if request.method=="POST":
                 picture=request.data
-                #print(picture)
                 information = calculateEverything(OCR(picture))
+                print(information)
 
         return "success"
 
