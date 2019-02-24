@@ -21,7 +21,6 @@ def convertPic():
                 text=image_file_to_string('pic.png')
                 text=image_file_to_string('pic.png',graceful_errors=True)
                 print ("Done reading picture")
-                print(text)
                 return (text)
         
 def parseList( text):
@@ -51,6 +50,7 @@ def parseList( text):
                         lst[i]=lst[i].replace("\n", " ")
                 if oilMode:
                         lst[i]=lst[i]+" OIL"
+        print(lst)
         return lst
 def OCR( encoded64Pic ):
         imgBin = base64.b64decode(encoded64Pic)

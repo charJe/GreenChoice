@@ -23,7 +23,6 @@ def getPicture():
                 picture=request.data
                 information = calculateEverything(OCR(picture))
                 print(information)
-
         return "success"
 
 @app.route('/getInfo/' , methods=['GET'])

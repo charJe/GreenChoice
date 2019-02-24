@@ -14,10 +14,12 @@ def calculateEverything(ingredients):
     waterJSON = loadWaterJSON()
     with open('./DietaryRestrictions.json') as json_file:  
         restrictionsJSON = json.load(json_file)
-    finalJSON = setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON)
+    finJSON = setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON)
+    finalJSON = loadIngredientsXJSON(finJSON)
     return(finalJSON)
 
 def setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON):
+    finalJSON = []
     type = "NONVEGETARIAN"
     totalWater = 0
 
@@ -33,7 +35,7 @@ def setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON):
             
             if (ingredientx["ingredient"].upper()) == (databaseWaterElement["name"].upper()):
                 totalWater = totalWater + int((databaseWaterElement["parsedValues"])[3])
-        finalJSON.append({"ingredients" : {"ingredient": ingredientx["ingredient"], "type": type, "water": totalWater}})
+        finalJSON.append({"ingredient": ingredientx["ingredient"], "type": type, "water": totalWater})
     return(finalJSON)
 
 def loadIngredientsJSON(ingr):
@@ -41,6 +43,13 @@ def loadIngredientsJSON(ingr):
     zee = []
     for x in ingr:
         zee.append({"ingredient": x})
+
+    return zee
+
+def loadIngredientsXJSON(ingr):
+    
+    zee = []
+    zee.append({"ingredients": ingr})
 
     return zee
 

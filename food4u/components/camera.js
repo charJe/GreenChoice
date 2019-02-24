@@ -3,7 +3,7 @@ import { Button,Text,Image, View, StyleSheet, TouchableOpacity, ImageStore, Toas
 import { Camera, 
   Permissions, 
   FlatList, 
-  AsyncStorage} from 'expo';
+  AsyncStorage, ImagePicker} from 'expo';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -80,6 +80,7 @@ export default class CameraComponent extends React.Component {
   }
 
   render() {
+    
     if(this.state.view == "Camera"){
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
@@ -107,12 +108,24 @@ export default class CameraComponent extends React.Component {
                   }}>
                 <Image style={styles.button} source={{uri: 'http://a2.mzstatic.com/us/r30/Purple69/v4/ca/47/da/ca47da2f-877c-68a4-124b-0eee5d38be2e/icon175x175.png'}} style= {{width: 120, height: 120}}></Image>
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={async () => {
+                  this.state.photo = await ImagePicker.launchImageLibraryAsync({
+                  allowsEditing: true,
+                  })
+                  this.postPhoto();
+                  this.state.View = "View";
+                }}>
+                <Image style={styles.button} source={{uri: 'https://vignette.wikia.nocookie.net/stalkerdex/images/e/ed/Temoc.png/revision/latest?cb=20140119042021'}} style= {{width: 60, height: 60}}></Image>
+                </TouchableOpacity>
                 
             </View>
         </View>
       );
     }
     }
+
+    
 
     else if(this.state.view == "Details"){
 
@@ -177,6 +190,7 @@ export default class CameraComponent extends React.Component {
       )
     }
     }
+    
 }
 
 const styles = StyleSheet.create({
