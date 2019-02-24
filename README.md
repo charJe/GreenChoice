@@ -9,7 +9,7 @@ We focused on water footprint data of each food item and then utilized a compreh
 ## How to Run
 1. Download the app
 2. Take a picture of a list of ingredients, filling up the camera as much as possible
-3. The picture will be sent to our ___ server and will return the overall water footprint, the vegan/vegetarian ingredients, and if it is overall vegetarian, vegan, or neither.
+3. The picture will be sent to our server and will return the overall water footprint, the vegan/vegetarian ingredients, and if it is overall vegetarian, vegan, or neither.
 
 ## Our Goal
 Our goal is to inform the user of the environmental impact of their food choices by considering factors such as water usage. 
@@ -25,7 +25,9 @@ We hope to promote conscious, compassionate eating by encouraging consumers to t
 
 <i>Arami Guerra</i>: Database compilation
 
-### Sources
+#### Sources
 Vegetarian Journal's Guide To Food Ingredients. (n.d.). Retrieved from https://www.vrg.org/ingredients/
 
+Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf
 
+Mekonnen-Hoekstra-2011-WaterFootprintCrops_2.pdf
