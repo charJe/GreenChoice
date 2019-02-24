@@ -52,9 +52,9 @@ def getIngreInfo(ingredient):
   
     print (bestM)
 
-    return 0;
+    return [tbwf,tgwf,tgreywf,ttwf];
 
-getIngreInfo("soy beans")
+getIngreInfo("")
 
 
 
