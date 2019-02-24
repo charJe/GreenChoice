@@ -43,12 +43,41 @@ def getIngreInfo(ingredient, file):
             best = a
             ing = x
 # return the total for the best match
-    print(ing)
     return ing;
 
+#get diatary restriction
+def getRes(ingredients):
+    final = list();
+
+    for x in ingredients:
+        ing = getIngreInfo(x,'DietaryRestrictions.json');
+
+        # none of the above
+        rr = 2;
+
+        if ing[1][0] == "Vegan":
+            rr = 0
+        if ing[1][0] == "Vegetarian":
+            rr = 1
+        final.append([x,rr]);
+
+    print(final)
+    return final;
+
+def whatIs(ing):
+    i = 0;
+    for x in ing:
+        i = max(i,x[1])
+    if i == 0:
+        return "Vegan"
+    if i == 1:
+        return "Vegetarian"
+    return "none"
 
 
-getIngreInfo("wheat",'GlobalAvgWaterFootPrintForPrimaryCrop.json')
+
+print(whatIs(getRes(["Wheat","milk"])))
+#getIngreInfo("wheat",'GlobalAvgWaterFootPrintForPrimaryCrop.json')
 
 
 
