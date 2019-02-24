@@ -1,15 +1,15 @@
+from flask import Flask,request
 import json
-from process import *
-from getWaterFootPrint import *
 
 from flask import Flask,request
 
 app = Flask(__name__)
 picture=None
+information=None
 
 @app.route('/')
 def new():
-        print('hello')
+        print('POST: /postPicture/ , GET: /getInfo/')
 
         return "success"
 
@@ -20,9 +20,11 @@ def getPicture():
         if request.method=="POST":
                 picture=request.data
                 #print(picture)
-                OCR(picture)
+                #OCR(picture)
 
         return "success"
+
 @app.route('/getInfo/' , methods=['GET'])
 def sendInfo():
-    return '{"ingredients" : [{"ingredient" : "flour", "type" : "vegan"},{"ingredient" : "eggs", "type" : "vegetarian"},{"ingredient" : "fruit", "type" : "vegan"}],"overallType" : "vegetarian"}';
+	return '{"ingredients" : [{"ingredient" : "flour", "type" : "vegan"},{"ingredient" : "eggs", "type" : "vegetarian"},{"ingredient" : "fruit", "type" : "vegan"}],"overallType" : "vegetarian"}';
+
