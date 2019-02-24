@@ -5,8 +5,12 @@
 import argparse
 import os
 import time
+import re
+import base64
+import io
 
 from AbbyyOnlineSdk import *
+
 
 processor = None
 
@@ -69,42 +73,62 @@ def recognize_file(file_path, result_file_path, language, output_format):
 			print("Result was written to {}".format(result_file_path))
 	else:
 		print("Error processing task")
-
-
-def create_parser():
-	parser = argparse.ArgumentParser(description="Recognize a file via web service")
-	parser.add_argument('source_file')
-	parser.add_argument('target_file')
-
-	parser.add_argument('-l', '--language', default='English', help='Recognition language (default: %(default)s)')
-	group = parser.add_mutually_exclusive_group()
-	group.add_argument('-txt', action='store_const', const='txt', dest='format', default='txt')
-	group.add_argument('-pdf', action='store_const', const='pdfSearchable', dest='format')
-	group.add_argument('-rtf', action='store_const', const='rtf', dest='format')
-	group.add_argument('-docx', action='store_const', const='docx', dest='format')
-	group.add_argument('-xml', action='store_const', const='xml', dest='format')
-
-	return parser
-
-
-def main():
+                
+def convertPic():
 	global processor
 	processor = AbbyyOnlineSdk()
 
-	setup_processor()
-
-	args = create_parser().parse_args()
-
-	source_file = args.source_file
-	target_file = args.target_file
-	language = args.language
-	output_format = args.format
-
-	if os.path.isfile(source_file):
-		recognize_file(source_file, target_file, language, output_format)
+	setup_processor()        
+        
+	if os.path.isfile('pic'):
+		recognize_file('pic', 'list', 'English', 'txt')
 	else:
 		print("No such file: {}".format(source_file))
-
-
+        
+def parseList():
+        with io.open('list', 'r', encoding='utf-8') as f:
+                lst=f.read()
+                lst.rstrip()
+        lst = re.split(':\s*|,\s*|;\s*|\.\s*',lst)
+        oilMode=False
+        for i in range(len(lst)):
+                if '(' in lst[i] and ')' in lst[i]:
+                        lst[i] = lst[i][:lst[i].index('(')]
+                if '(' in lst[i] and ')' not in lst[i]:
+                        biggerIngre=re.split('\(', lst[i], re.I)
+                        if "OIL" in biggerIngre[0]: # this is a list of oils
+                                oilMode=True
+                                lst[i]=biggerIngre[1]+" OIL"
+                        else:           # this is a list of sub ingridients
+                                lst[i]=biggerIngre[1];
+                elif ')' in lst[i]:
+                        lst[i] = lst[i][:(len(lst[i])-1)]
+                        if oilMode:
+                                lst[i]=lst[i]+" OIL"
+                        oilMode=False
+                #fix the problem caused by new lines and spaces in the middle of ingredients
+                if '\r\n' in lst[i]:
+                        lst[i]=lst[i].replace(" ","")
+                        lst[i]=lst[i].replace("\r\n", " ")
+                if '\n' in lst[i]:
+                        lst[i]=lst[i].replace(" ","")
+                        lst[i]=lst[i].replace("\n", " ")
+                if oilMode:
+                        lst[i]=lst[i]+" OIL"
+        return lst
+def OCR( encoded64Pic ):
+        imgBin = base64.b64decode(encoded64Pic)
+        picfl='pic'
+        with open(picfl, 'wb') as f:
+                f.write(imgBin)
+        convertPic()
+        # there is now a file called 'list' that contains the printed list of ingredients
+        return parseList()
+def main():
+        with open("notBread.png", 'rb') as f:
+                imgBin = f.read()
+                encodedStr = base64.b64encode(imgBin)
+        OCR(encodedStr)
+        
 if __name__ == "__main__":
 	main()
