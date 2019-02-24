@@ -7,7 +7,7 @@ Have you thought about where your food comes from? We created a mobile app that 
 We focused on water footprint data of each food item and then utilized a comprehensive list of vegetarian and vegan friendly foods/chemicals to determine if the overall food product is veg or vegan friendly. 
 
 ## How to Run
-1. Download the app
+1. Download the app ( not available currently on the app store )
 2. Take a picture of a list of ingredients, filling up the camera as much as possible
 3. The picture will be sent to our server and will return the overall water footprint, the vegan/vegetarian ingredients, and if it is overall vegetarian, vegan, or neither.
 
@@ -28,6 +28,6 @@ We hope to promote conscious, compassionate eating by encouraging consumers to t
 #### Sources
 Vegetarian Journal's Guide To Food Ingredients. (n.d.). Retrieved from https://www.vrg.org/ingredients/
 
-Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf
+<a href = "Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf">Mekonnen, Hoekstra, et. al. Farm Animal Product Water Footprint, 2012. </a>
 
-Mekonnen-Hoekstra-2011-WaterFootprintCrops_2.pdf
+<a href = "Mekonnen-Hoekstra-2011-WaterFootprintCrops_2.pdf">Mekonnen, Hoekstra, et. al. Crops Water Footprint, 2011. </a>
