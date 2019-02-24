@@ -123,7 +123,7 @@ def OCR( encoded64Pic ):
                 f.write(imgBin)
         convertPic()
         # there is now a file called 'list' that contains the printed list of ingredients
-        print parseList()
+        return parseList()
 def main():
         with open("notBread.png", 'rb') as f:
                 imgBin = f.read()

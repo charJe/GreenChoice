@@ -3,11 +3,19 @@ import json
 from flask import Flask
 
 app = Flask(__name__)
+picture=None
 
-
-@app.route('/new', methods=['GET'])
+@app.route('/')
 def new():
-    if request.method == "GET":
-        img = request.data.img;
-        
+        print('hello')
+
+        return "success"
+
+
+@app.route('/postPicture', methods=['POST'])
+def getPicture():
+        global picture;
+        if request.method=="POST":
+                picture=request.data
+
         return "success"

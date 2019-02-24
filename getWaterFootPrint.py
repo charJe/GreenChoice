@@ -17,7 +17,7 @@ def waterFootPrint(ingredients):
     # add up the water footprint of all the ingredients
 
     for ingre in ingredients:
-        ing = getIngreInfo(ingre, 'GlobalAvgWaterFootPrintForPrimaryCrop.json')
+        ing = getIngreInfo(ingre, 'GlobalAvgWaterFootPrintForPrimaryCrop.json',30)
         twf+= ing[1][3]
         greywf+= ing[1][2]
         gwf+= ing[1][1]
@@ -27,12 +27,12 @@ def waterFootPrint(ingredients):
 
 
 # look for the specific ingredient in the json
-def getIngreInfo(ingredient, file):
+def getIngreInfo(ingredient, file,best):
     
     with open(file) as f:
         data = json.load(f)
 
-    best = 30
+    
 
     ing = []
 
@@ -50,8 +50,11 @@ def getRes(ingredients):
     final = list() 
 
     for x in ingredients:
-        ing = getIngreInfo(x,'DietaryRestrictions.json') 
+        ing = getIngreInfo(x,'DietaryRestrictions.json', 100) 
 
+        if ing == []:
+            final.append((x,2))
+            return final
         # none of the above
         rr = 2 
 
@@ -61,7 +64,7 @@ def getRes(ingredients):
             rr = 1
         final.append([x,rr]) 
 
-    print(final)
+    
     return final 
 
 def whatIs(ing):
@@ -76,7 +79,7 @@ def whatIs(ing):
 
 
 
-print(whatIs(getRes(["Wheat","milk"])))
+print(whatIs(getRes(["vitamin d2"])))
 #getIngreInfo("wheat",'GlobalAvgWaterFootPrintForPrimaryCrop.json')
 
 
