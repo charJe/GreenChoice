@@ -32,9 +32,9 @@ def getIngreInfo(ingredient, file):
     with open(file) as f:
         data = json.load(f)
 
-    best = 30;
+    best = 30
 
-    ing = [];
+    ing = []
 
 # go through the data
     for x in data:
@@ -43,29 +43,29 @@ def getIngreInfo(ingredient, file):
             best = a
             ing = x
 # return the total for the best match
-    return ing;
+    return ing 
 
 #get diatary restriction
 def getRes(ingredients):
-    final = list();
+    final = list() 
 
     for x in ingredients:
-        ing = getIngreInfo(x,'DietaryRestrictions.json');
+        ing = getIngreInfo(x,'DietaryRestrictions.json') 
 
         # none of the above
-        rr = 2;
+        rr = 2 
 
         if ing[1][0] == "Vegan":
             rr = 0
         if ing[1][0] == "Vegetarian":
             rr = 1
-        final.append([x,rr]);
+        final.append([x,rr]) 
 
     print(final)
-    return final;
+    return final 
 
 def whatIs(ing):
-    i = 0;
+    i = 0 
     for x in ing:
         i = max(i,x[1])
     if i == 0:
