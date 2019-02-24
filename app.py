@@ -27,5 +27,3 @@ def getPicture():
 @app.route('/getInfo/' , methods=['GET'])
 def sendInfo():
 	return '{"ingredients" : [{"ingredient" : "flour", "type" : "vegan"},{"ingredient" : "eggs", "type" : "vegetarian"},{"ingredient" : "fruit", "type" : "vegan"}],"overallType" : "vegetarian"}';
-
-        return "success"
