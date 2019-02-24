@@ -8,8 +8,8 @@ We focused on water footprint data of each food item and then utilized a compreh
 
 ## How to Run
 1. Download the app ( not available currently on the app or play store )
-2. Take a clear picture of a list of ingredients
-3. The picture will be sent to our server and will return the overall water footprint, the vegan/vegetarian ingredients, and if it is overall vegetarian, vegan, or neither.
+2. Take a clear picture of a list of ingredients OR upload one from your gallery
+3. The picture will be sent to our server and will return the overall water footprint, the vegan/vegetarian ingredients, and if it is overall vegetarian, vegan, or neither
 
 ## Our Goal
 Our goal is to inform the user of the environmental impact of their food choices by considering factors such as water usage. Many consumers are not aware of the amount of water it takes to produce their food - e.g. it takes 660 gallons to create a 1/3 lb. beef patty.
