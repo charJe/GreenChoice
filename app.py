@@ -5,6 +5,7 @@ from flask import Flask,request
 
 app = Flask(__name__)
 picture=None
+information=None
 
 @app.route('/')
 def new():
