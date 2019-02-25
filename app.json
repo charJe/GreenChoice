@@ -1,0 +1,15 @@
+{
+   "expo": {
+    "name": "Mind Your Food",
+    "icon": "https://i.ibb.co/61PrKQN/icon.png",
+    "version": "1.0.0",
+    "slug": "mindyourfood",
+    "sdkVersion": "XX.0.0",
+    "ios": {
+      "bundleIdentifier": "com.yourcompany.mindyourfood"
+    },
+    "android": {
+      "package": "com.yourcompany.mindyourfood"
+    }
+   }
+ }

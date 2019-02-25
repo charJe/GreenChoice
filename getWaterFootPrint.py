@@ -48,7 +48,7 @@ def loadIngredientsJSON(ingr):
 
 def loadIngredientsXJSON(ingr):
     
-    zee = []
+    zee = ""
     zee.append({"ingredients": ingr})
 
     return zee
