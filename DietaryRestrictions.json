@@ -64,6 +64,8 @@
   {"ingredient": "MILK", "type": "VEGETARIAN"},
   {"ingredient": "MILK POWDER", "type": "VEGETARIAN"},
   {"ingredient": "BUTTER", "type": "VEGETARIAN"},
+  {"ingredient": "EGGS", "type": "VEGETARIAN"},
+  {"ingredient": "EGG", "type": "VEGETARIAN"},
   {"ingredient": "CHEESE", "type": "VEGETARIAN"},  
   {"ingredient": "WHEAT", "type": "VEGAN"},
   {"ingredient": "WHEAT FLOUR", "type": "VEGAN"},
