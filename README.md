@@ -25,15 +25,6 @@ Our goal is to inform the user of the environmental impact of their food choices
 
 We hope to promote conscious, sustainable, compassionate eating by encouraging consumers to think about the impact of each item on both their body and our planet.
 
-### Creators and Concepts Used
-<i>Mohit Bhole</i>: Front end, Back end, validating values (vegan/vegetarian/water usage) from OCR (rewritten)
-
-<i>Charles Jackson</i>: OCR
-
-<i>Sarina Mak</i>: Database compilation, validating values
-
-<i>Arami Guerra</i>: Database compilation
-
 #### Sources
 Vegetarian Journal's Guide To Food Ingredients. (n.d.). Retrieved from https://www.vrg.org/ingredients/
 
