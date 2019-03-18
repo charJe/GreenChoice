@@ -3,8 +3,11 @@ A mobile app that utilizes OCR to inform the user about the water footprint and 
 
 ## Authors
 Mohit Bhole: Frontend (food4u), Backend server (app.py), Backend functions to collect and analyse data (getWaterFootPrint.py)
+
 Charles Jackson: OCR (proces.py)
+
 Sarina Mak: Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
+
 Arami: Setting up backend server, Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
 
 ## Description
