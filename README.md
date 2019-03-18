@@ -1,14 +1,14 @@
 # Mind Your Food 
 A mobile app that utilizes OCR to inform the user about the water footprint and veg-friendliness of a food item.
 
-## Authors
-Mohit Bhole: Frontend (food4u), Backend server (app.py), Backend functions to collect and analyse data (getWaterFootPrint.py)
+## Authors,
+<i>Mohit Bhole</i>: Frontend (food4u), Backend server (app.py), Backend functions to collect and analyse data (getWaterFootPrint.py)
 
-Charles Jackson: OCR (proces.py)
+<i>Charles Jackson</i>: OCR (proces.py)
 
-Sarina Mak: Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
+<i>Sarina Mak</i>: Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
 
-Arami: Setting up backend server, Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
+<i>Arami</i>: Setting up backend server, Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
 
 ## Description
 Have you thought about where your food comes from? We created a mobile app that promotes conscious eating by using Optical Character Recognition (OCR) to scan ingredient lists. 
