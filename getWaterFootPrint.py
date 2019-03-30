@@ -27,15 +27,13 @@ def setIngreInfo(ingredientJSON,waterJSON,restrictionsJSON):
         type = "NONVEGETARIAN"
         totalWater = 0
         for databaseIngredient in restrictionsJSON["List"]:
-            # print(ingredientx["ingredient"].upper()+" ")
-            # print(databaseIngredient["ingredient"].upper()+" ")
             if (ingredientx["ingredient"].upper()) == (databaseIngredient["ingredient"].upper()):
                 type = databaseIngredient["type"]
         for databaseWaterElement in waterJSON:
             
             if (ingredientx["ingredient"].upper()) == (databaseWaterElement["name"].upper()):
                 totalWater = totalWater + int((databaseWaterElement["parsedValues"])[3])
-        finalJSON.append({"ingredient": ingredientx["ingredient"], "type": type, "water": totalWater})
+        finalJSON.append({"ingredient": ingredientx["ingredient"], "data": [{"type": type, "water": totalWater}]})
     return(finalJSON)
 
 def loadIngredientsJSON(ingr):
