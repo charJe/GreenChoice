@@ -1,0 +1,7 @@
+1. Fix what is NOT vegan data base(json) and alter fuzzy wuzzy code to search it
+
+2. Use a different ocr. maybe google vision or other online service
+
+3. finish visual front end. example: the ingirdients
+
+4. complete enviromental impact.

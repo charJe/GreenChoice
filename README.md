@@ -1,6 +1,15 @@
 # Mind Your Food 
 A mobile app that utilizes OCR to inform the user about the water footprint and veg-friendliness of a food item.
 
+## Authors
+<i>Mohit Bhole</i>: Frontend (food4u), Backend server (app.py), Backend functions to collect and analyse data (getWaterFootPrint.py)
+
+<i>Charles Jackson</i>: OCR (proces.py)
+
+<i>Sarina Mak</i>: Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
+
+<i>Arami</i>: Setting up backend server, Backend functions (getWaterFoorPrint.py prototype), Data collection and organization (json files)
+
 ## Description
 Have you thought about where your food comes from? We created a mobile app that promotes conscious eating by using Optical Character Recognition (OCR) to scan ingredient lists. 
 
@@ -15,15 +24,6 @@ We focused on water footprint data of each food item and then utilized a compreh
 Our goal is to inform the user of the environmental impact of their food choices by considering factors such as water usage. Many consumers are not aware of the amount of water it takes to produce their food - e.g. it takes 660 gallons to create a 1/3 lb. beef patty.
 
 We hope to promote conscious, sustainable, compassionate eating by encouraging consumers to think about the impact of each item on both their body and our planet.
-
-### Creators and Concepts Used
-<i>Mohit Bhole</i>: Front end, Back end, validating values (vegan/vegetarian/water usage) from OCR (rewritten)
-
-<i>Charles Jackson</i>: OCR
-
-<i>Sarina Mak</i>: Database compilation, validating values
-
-<i>Arami Guerra</i>: Database compilation
 
 #### Sources
 Vegetarian Journal's Guide To Food Ingredients. (n.d.). Retrieved from https://www.vrg.org/ingredients/
