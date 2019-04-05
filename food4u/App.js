@@ -6,29 +6,26 @@ import {Camera,
   Constants, 
   ImagePicker,
   } from 'expo';
+var backend = require('./backend.js');
+
 
 function POST(data, endpoint) {
-  return fetch('http://192.168.137.134:5000' + endpoint, {
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-    body: JSON.stringify(data),
-  });
+  let formData = new FormData();
+  formData.append('apikey', '072262d90988957')
+  formData.append('base64Image', data)
+  console.log(formData);
+
+  return fetch('https://api.ocr.space/parse/image', {
+    method: 'POST',
+    body: formData,
+  }).then(function(response){
+    console.log(response.text());
+    //this.state.ocr = response.json();
+  }, function(error){
+    error.message
+  })
 }
 
-function GET(endpoint) {
-  console.log("Getting " + endpoint)
-  return fetch('http://192.168.137.134:5000' + endpoint, {
-  method: 'GET',
-  methods: 'GET',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  }
-  });
-}
 
 export default class App extends React.Component {
 
@@ -120,15 +117,15 @@ export default class App extends React.Component {
 
   async takePhoto() {
     await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
-    this.state.view = 'Picker';
     this.state.photo = await ImagePicker.launchCameraAsync({
     allowsEditing: true,
     quality: 0.8,
+    base64: true,
     })
     if(this.state.photo.cancelled != true){
       console.log(this.state)
-      this.setState({view: 'View'})
-      //this.postPhoto();
+      this.setState({view: 'View'});
+      this.postPhoto();
     }
     else{
       ToastAndroid.show('Picture not taken', ToastAndroid.SHORT);
@@ -137,14 +134,16 @@ export default class App extends React.Component {
 
   async selectPhoto() {
     await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
-    this.setState({view: 'Picker'})
     this.state.photo = await ImagePicker.launchImageLibraryAsync({
     allowsEditing: true,
+    base64: true,
     })
     if(this.state.photo.cancelled != true){
       this.setState({view: 'View'})
-      console.log(this.state)
-      //this.postPhoto();
+      console.log(this.state);
+      this.postPhoto();
+
+      console.log(this.state.ocr)
     }
     else{
       ToastAndroid.show('Picture not taken', ToastAndroid.SHORT);
@@ -152,21 +151,15 @@ export default class App extends React.Component {
   }
 
   postPhoto(){
-    ImageStore.getBase64ForTag(this.state.photo.uri, (base64Data) => {
-      let data = base64Data
+      let data = 'data:image/jpeg;base64,' + this.state.photo.base64;
       this.setState({posting: true})
-      POST(data, '/postPicture/').then(() => {
-        this.setState({photo: 'null', readyToGet: 1})
+      POST(data, 'https://api.ocr.space/parse/image').then(() => {
+        this.setState({readyToGet: 1})
       }, (err) => {
         ToastAndroid.show('Error connecting with server', ToastAndroid.SHORT);
         console.log("Error connecting with server")
         this.setState({posting: false})
       })
-    }, (err) => {
-      ToastAndroid.show('Critical error converting photo', ToastAndroid.SHORT);
-      console.log("Critical error converting photo")
-      this.setState({view: "Camera", photo: 'null'})
-    })
   }
 
   render() {
@@ -254,11 +247,10 @@ export default class App extends React.Component {
     else if(this.state.view == 'View'){
 
       if(this.state.readyToGet == 1){
-        this.state.information = analyze.calculateEverything(this.state.ocr);
-        
+        this.state.information = backend.calculateEverything(this.state.ocr);
+        this.state.information = JSON.parse(this.state.information)
+        console.log(this.state.information)
       }
-
-      console.log(this.state.information)
 
       return(
         <View style={{backgroundColor: '#ffffff', flex: 1}}>
@@ -267,8 +259,8 @@ export default class App extends React.Component {
 
           <View style={{backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center'}}>
           <View style={{height: Constants.statusBarHeight}}></View>
-          <Text style={{fontSize:56 }}>It's </Text>
-          <Text style={{fontSize:56, color:'#71c7f7'}}>{this.state.information.overallType}</Text>
+          <Text style={{fontSize:52 }}>ITS</Text>
+          <Text style={{fontSize:45, color:'#9aeae8'}}>{this.state.information.overallType}</Text>
           </View>
 
           <View style={{backgroundColor: '#ffffff', height: '42%', width: '100%'}}></View>
@@ -301,7 +293,14 @@ export default class App extends React.Component {
     }
 
     else{
-      return(null)
+      return(
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Whoops! You were not supposed to be here :(</Text>
+        <Text>Please close the app and try again!</Text>
+        </View>
+      </View>
+      )
     }
     }
     

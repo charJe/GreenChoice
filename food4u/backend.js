@@ -1,11 +1,3 @@
-'use strict';
-var console = require("console");
-
-const fs = require('fs');
-
-var ingredientJSON = []
-
-
 var waterJSON = require('./GlobalAvgWaterFootPrintForPrimaryCrop.json');
 var restrictionJSON = require('./DietaryRestrictions.json');
 
@@ -28,17 +20,16 @@ calculateEverything: function (ingredients){
         for(var j in waterJSON){
             if(((waterJSON[j].name)) == ((ingredients[i]).toUpperCase())){
                 water = parseInt(((waterJSON[j].values).split(','))[3]);
-                console.log(water)
                 totalWater = totalWater + water;
                 break;
             }
         }
 
-        finalJSON = finalJSON.concat('{"ingredient": '+(ingredients[i]).toUpperCase()+', "data": [{"type": '+type+', "water": '+water+'}]}')
+        finalJSON = finalJSON.concat('{"ingredient": "'+(ingredients[i]).toUpperCase()+'", "data": [{"type": "'+type+'", "water": "'+water+'"}]},')
     }
+    finalJSON = finalJSON.slice(0, -1);
     finalJSON = finalJSON.concat('], "overallType": "'+overallType+'", "totalWater": "'+totalWater+'" }')
 
-    console.log(finalJSON)
     return(finalJSON)
 }
 }
