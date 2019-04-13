@@ -8,22 +8,41 @@ import {Camera,
   } from 'expo';
 var backend = require('./backend.js');
 
-
-function POST(data, endpoint) {
-  let formData = new FormData();
-  formData.append('apikey', '072262d90988957')
-  formData.append('base64Image', data)
-  console.log(formData);
-
-  return fetch('https://api.ocr.space/parse/image', {
-    method: 'POST',
-    body: formData,
-  }).then(function(response){
-    console.log(response.text());
-    //this.state.ocr = response.json();
-  }, function(error){
-    error.message
-  })
+function parseIngredients(text){
+  let list = text.split(new  RegExp(/: |, |;/) );
+  let oilMode = false;
+  for(let i=0; i < list.length; i++){
+// get rid of AKA and specifications
+if( (list[i]).includes("(") && (list[i]).includes(")") ){
+    list[i] = list[i].substr(0,list[i].indexOf("("));
+}else
+// break up a list of sub ingredients
+if(list[i].includes("(")){
+    let biggerIngre = list[i].split("\(");
+    if(biggerIngre[0].includes("OIL")){ // this is a list of oils
+  oilMode = true;
+  list[i] = biggerIngre[1] += " OIL";
+    }else{		// this is a sub list but not of oil
+  list[i] = biggerIngre[1];
+    }
+}else if(list[i].includes(")")){ // the end of a list of ingredients
+    list[i] = list[i].substring(0,list[i].length-1); // remove the )
+    if(oilMode){
+  list[i] += " OIL";
+    }
+    oilMode = false;
+}
+// fix the problem caused by new lines and spaces in the middle of ingredients
+if(list[i].includes("\r\n") || list[i].includes("\n")){
+    list[i] = list[i].replace(" ","");
+    list[i] = list[i].replace("\r\n", " ");
+    list[i] = list[i].replace("\n"," ");
+}
+if(oilMode){
+    list[i] += " OIL";
+}
+  }
+  return list;
 }
 
 
@@ -31,7 +50,7 @@ export default class App extends React.Component {
 
   state = {
     backHandler: null,
-    ocr: ["FLOUR","NIACIN","THIAMINE MONONITRATE", "GELATIN", "FOLIC ACID", "RIBOFLAVIN", "SOYBEAN OIL", "SALT", "CALCIUM PROPIONATE"],
+    ocr: [],
     type: Camera.Constants.Type.back,
     photo: 'null',
     view: 'Camera',
@@ -123,7 +142,6 @@ export default class App extends React.Component {
     base64: true,
     })
     if(this.state.photo.cancelled != true){
-      console.log(this.state)
       this.setState({view: 'View'});
       this.postPhoto();
     }
@@ -140,20 +158,43 @@ export default class App extends React.Component {
     })
     if(this.state.photo.cancelled != true){
       this.setState({view: 'View'})
-      console.log(this.state);
       this.postPhoto();
-
-      console.log(this.state.ocr)
     }
     else{
       ToastAndroid.show('Picture not taken', ToastAndroid.SHORT);
     }
   }
 
+  POST(data, endpoint) {
+    let formData = new FormData();
+    formData.append('apikey', '072262d90988957')
+    formData.append('base64Image', data)
+    console.log(formData);
+  
+    return fetch('https://api.ocr.space/parse/image', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return Promise.reject({
+          status: response.status,
+          statusText: response.statusText
+        })
+      }})
+    .then(data => {
+      // Here's a list of repos!
+      this.state.ocr = parseIngredients(data.ParsedResults[0].ParsedText)
+    });
+  }
+
   postPhoto(){
       let data = 'data:image/jpeg;base64,' + this.state.photo.base64;
       this.setState({posting: true})
-      POST(data, 'https://api.ocr.space/parse/image').then(() => {
+      this.POST(data, 'https://api.ocr.space/parse/image').then(() => {
+        console.log(this.state.ocr)
         this.setState({readyToGet: 1})
       }, (err) => {
         ToastAndroid.show('Error connecting with server', ToastAndroid.SHORT);
@@ -234,7 +275,7 @@ export default class App extends React.Component {
           </View>
           <ScrollView style={{paddingTop: 0}}>
             <SectionList
-                sections={this.dummy}
+                sections={this.state.information.List}
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderSectionHeader}
                 keyExtractor={this.extractKey}
@@ -248,8 +289,8 @@ export default class App extends React.Component {
 
       if(this.state.readyToGet == 1){
         this.state.information = backend.calculateEverything(this.state.ocr);
-        this.state.information = JSON.parse(this.state.information)
-        console.log(this.state.information)
+        console.log(this.state.information.List)
+        //this.state.information = JSON.parse(this.state.information)
       }
 
       return(
